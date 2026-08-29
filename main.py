@@ -2,7 +2,6 @@ from turtle import Turtle, Screen
 import pandas
 
 guessed_states = []
-not_guessed_states = []
 t = Turtle()
 p = Turtle()
 
@@ -38,9 +37,10 @@ while game_is_on:
         game_is_on = False
 
     elif state_name_title == "Exit":
-        for state in states:
-            if state not in guessed_states:
-                not_guessed_states.append(state)
+        not_guessed_states = [state for state in states if state not in guessed_states]
+        # for state in states:
+        #     if state not in guessed_states:
+        #         not_guessed_states.append(state)
         data = pandas.DataFrame(not_guessed_states)
         data.to_csv("not_guessed_states.csv")
         game_is_on = False
